@@ -1,0 +1,14 @@
+<div
+    *ngFor="let event of events; first as isFirst"
+    class="flex flex-col ml-8"
+    [ngClass]="{
+        'pt-6': isFirst,
+        'pt-4': !isFirst
+    }">
+    <h5 class="font-semibold text-base text-slate-800 dark:text-sky-100">
+        {{ event.title }}
+    </h5>
+    <p class="text-slate-600 dark:text-sky-200">
+        {{ event.text }}
+    </p>
+</div>

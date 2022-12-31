@@ -1,0 +1,117 @@
+<div class="flex flex-row space-x-8 h-full max-h-full">
+    <div class="flex-1 flex flex-col space-y-8 py-4 pl-4 pr-4 xl:pr-0">
+        <!-- page heading-->
+        <div
+            class="flex-shrink-0 flex flex-row items-center justify-between pt-6">
+            <h3
+                class="font-medium font-roboto-slab truncate dark:text-slate-200">
+                {{ ComponentName }}
+            </h3>
+            <app-timestamp-card class="flex-shrink-0"></app-timestamp-card>
+        </div>
+
+        <!-- page content -->
+        <div
+            id="content-area"
+            class="flex-1 flex flex-row space-x-2 p-1 h-full max-h-full overflow-hidden">
+            <!-- members list -->
+            <div
+                class="flex-shrink-0 flex flex-col rounded-lg w-96 h-full max-h-full bg-white dark:bg-slate-800 text-sm text-slate-600 dark:text-slate-400 shadow-xl shadow-slate-800/5 dark:shadow-slate-100/5 ring-1 ring-slate-800/10 dark:ring-slate-100/10 pointer-events-auto">
+                <!-- search -->
+                <div
+                    class="flex-shrink-0 relative flex items-center min-h-[44px] h-11 max-h-11 text-slate-400 focus-within:text-sky-600 dark:focus-within:text-sky-400">
+                    <span
+                        class="absolute inset-y-0 flex flex-row items-center justify-center pl-4 font-light text-2xl">
+                        <span class="material-symbols material-symbols-rounded"
+                            >search
+                        </span>
+                    </span>
+
+                    <input
+                        type="text"
+                        placeholder="Search members..."
+                        class="block pt-0 pr-6 pb-0 pl-12 w-full bg-transparent leading-5 tracking-wider outline-none focus:outline-none placeholder:text-slate-400 dark:placeholder:text-slate-400"
+                        [formControl]="searchTextControl" />
+                </div>
+
+                <!-- list items -->
+                <div
+                    class="flex-1 flex flex-col border-t border-slate-400/20 py-1 h-full max-h-full overflow-hidden">
+                    <div class="flex-shrink-0 py-4 px-3.5">
+                        <span class="font-semibold">Members</span>
+                    </div>
+                    <div
+                        class="px-8 h-[1px] bg-gradient-to-r from-transparent via-slate-400/20 to-transparent"></div>
+                    <div
+                        class="flex-1 pt-0.5 pb-1 h-full max-h-full overflow-hidden">
+                        <div
+                            class="h-full max-h-full overflow-y-auto"
+                            data-simplebar>
+                            <div
+                                *ngIf="isSearching"
+                                class="flex flex-row items-center justify-center px-2 pt-0.5">
+                                <span
+                                    class="flex-shrink-0 flex flex-row items-center justify-center w-10 h-10 font-extralight text-3xl animate-spin">
+                                    <span
+                                        class="material-symbols material-symbols-rounded"
+                                        >cycle
+                                    </span>
+                                </span>
+                            </div>
+                            <div
+                                *ngIf="!isSearching"
+                                class="flex flex-col space-y-2 divide-y divide-slate-400/10 px-2 pt-0.5">
+                                <app-member-list-item
+                                    *ngFor="let member of filteredMembers"
+                                    [member]="member"
+                                    [is-selected]="
+                                        member.member_id ===
+                                        selectedMember?.member_id
+                                    "
+                                    (emit-member)="
+                                        setSelectedMember($event)
+                                    "></app-member-list-item>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- members data/action -->
+            <div
+                class="flex-1 flex flex-col border-slate-400/40 dark:border-slate-600/40 rounded-lg h-full max-h-full overflow-hidden bg-white dark:bg-slate-800">
+                <div
+                    class="flex-shrink-0 flex flex-row items-center justify-between border-b border-slate-400/20 px-4 min-h-[44px] h-11 max-h-11">
+                    <div>
+                        <h3
+                            class="font-medium text-base text-slate-600 dark:text-slate-200 truncate">
+                            {{ activeActionButton?.tooltip || '' }}
+                        </h3>
+                    </div>
+                    <app-button-radio-group
+                        [buttons]="ButtonRadioGroup"
+                        (emit-button-radio)="
+                            setActiveActionButton($event)
+                        "></app-button-radio-group>
+                </div>
+                <div
+                    class="flex-1 p-4 h-full max-h-full overflow-y-auto"
+                    data-simplebar>
+                    <form class="grid gap-4 grid-cols-1 xl:grid-cols-2">
+                        <app-select
+                            [label]="'Countries'"
+                            [items]="countriesSelectItems"
+                            [initial-item]="defaultCountrySelectItem"
+                            [no-selection-text]="'Select Country'"></app-select>
+                    </form>
+                    <div class="h-[1024px]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside
+        class="flex-shrink-0 hidden xl:flex flex-col space-y-8 p-4 min-w-[300px] w-[300px] max-w-[300px] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+        @Aside
+    </aside>
+</div>

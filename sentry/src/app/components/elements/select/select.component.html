@@ -1,0 +1,53 @@
+<div class="min-w-[300px] max-w-[350px]">
+    <label
+        id="listbox-label"
+        class="pl-0.5 block font-medium text-sm text-gray-600 dark:text-gray-200"
+        >{{ label }}</label
+    >
+    <div class="relative mt-1 text-sky-800 dark:text-sky-100 w-full">
+        <button
+            type="button"
+            class="flex flex-row items-center justify-between border border-sky-300 dark:border-sky-600 rounded-md px-4 py-1.5 bg-white dark:bg-sky-800 w-full max-w-full outline-none focus:outline-none focus:ring-1 focus:ring-sky-300 dark:focus:ring-sky-600 cursor-default"
+            (click)="toggleDropdown()">
+            <div
+                class="flex flex-row items-center space-x-4 w-full max-w-full overflow-hidden">
+                <span
+                    class="flex-shrink-0 flex flex-row items-center justify-center rounded-full w-7 h-7 bg-white dark:bg-sky-800">
+                    <img
+                        *ngIf="selectedItem!!.img && selectedItem!.img !== ''"
+                        [src]="selectedItem!.img"
+                        class="flex-shrink-0 rounded-full w-full h-full object-cover" />
+                </span>
+                <span class="font-semibold text-sm truncate">{{
+                    selectedItem!.text
+                }}</span>
+            </div>
+            <span
+                class="flex flex-row items-center justify-center w-6 h-6 font-light text-2xl">
+                <span class="material-symbols material-symbols-rounded"
+                    >unfold_more
+                </span>
+            </span>
+        </button>
+
+        <ul
+            @animateinout
+            *ngIf="isDropdownShown"
+            tabindex="-1"
+            role="listbox"
+            aria-labelledby="listbox-label"
+            class="absolute z-10 border border-sky-600 dark:border-sky-600 rounded-md mt-1 py-1 h-56 max-h-56 w-full bg-white dark:bg-sky-800 overflow-x-hidden overflow-y-hidden">
+            <div
+                class="w-full h-full max-h-full overflow-x-hidden overflow-y-auto"
+                data-simplebar>
+                <app-select-item
+                    *ngFor="let item of items"
+                    [item]="item"
+                    [selected]="item.id === selectedItem!.id"
+                    (emit-selected-item)="
+                        setSelectedItem($event)
+                    "></app-select-item>
+            </div>
+        </ul>
+    </div>
+</div>

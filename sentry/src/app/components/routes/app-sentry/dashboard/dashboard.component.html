@@ -1,0 +1,127 @@
+<div class="flex flex-row space-x-8 h-full max-h-full">
+    <div class="flex-1 flex flex-col space-y-8 py-4 pl-4 pr-4 xl:pr-0">
+        <div
+            class="flex-shrink-0 flex flex-row items-center justify-between pt-6">
+            <h3
+                class="font-medium font-roboto-slab truncate dark:text-slate-200">
+                Dashboard
+            </h3>
+            <app-timestamp-card class="flex-shrink-0"></app-timestamp-card>
+        </div>
+
+        <div class="flex-shrink-0 flex flex-col space-y-2">
+            <h4 class="text-lg font-medium">Last Week</h4>
+            <!-- attendance adults and children -->
+            <!-- offering adults and children -->
+            <!-- tithes -->
+            <div
+                class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-11 2xl:grid-cols-3">
+                <app-stat-pill
+                    [color-scheme]="'indigo'"
+                    [icon]="'list_alt'"
+                    [title]="'Attendance'"
+                    [stat]="'198'"
+                    [stat-stat-note]="'28% from previous'"
+                    class="sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-3 2xl:col-span-1">
+                </app-stat-pill>
+
+                <app-stat-pill
+                    [color-scheme]="'fuchsia'"
+                    [icon]="'google_wifi'"
+                    [title]="'Offering'"
+                    [stat]="'GHS 37,908.60'"
+                    [stat-stat-note]="'28% from previous'"
+                    class="sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-4 2xl:col-span-1">
+                </app-stat-pill>
+
+                <app-stat-pill
+                    [color-scheme]="'teal'"
+                    [icon]="'wallet'"
+                    [title]="'Tithes'"
+                    [stat]="'GHS 84,700.00'"
+                    [stat-stat-note]="'28% from previous'"
+                    class="sm:col-span-1 md:col-span-2 lg:col-span-1 xl:col-span-4 2xl:col-span-1">
+                </app-stat-pill>
+            </div>
+        </div>
+
+        <div
+            class="flex-shrink-0 relative flex flex-row space-x-4 rounded-2xl p-8 max-h-96 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+            <div
+                class="h-8 overflow-hidden bg-rose-600 sm:bg-teal-600 md:bg-purple-600 lg:bg-indigo-600 xl:bg-orange-600 2xl:bg-fuchsia-600">
+                <span class="text-white">
+                    bg-rose-600 sm:bg-teal-600 md:bg-purple-600 lg:bg-indigo-600
+                    xl:bg-orange-600 2xl:bg-fuchsia-600
+                </span>
+            </div>
+        </div>
+
+        <div class="flex-shrink-0">
+            <div
+                class="grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2">
+                <div
+                    class="col-span-1 flex flex-col rounded-2xl p-6 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                    <div class="relative h-96 max-h-96">
+                        <canvas
+                            id="payments-chart"
+                            #paymentsCanvas
+                            baseChart
+                            [type]="lineChart"
+                            [options]="lineChartOptions"
+                            [data]="paymentsChartData">
+                        </canvas>
+                    </div>
+                    <div class="legend px-14">
+                        <h5
+                            class="font-medium text-base text-slate-600 dark:text-slate-200 uppercase">
+                            Tithes & Offerings
+                        </h5>
+                        <div class="grid gap-1 grid-cols-2">
+                            <app-chart-legend-item
+                                [data-colour]="'sky'"
+                                [legend-item]="'Tithes'">
+                            </app-chart-legend-item>
+                            <app-chart-legend-item
+                                [data-colour]="'fuchsia'"
+                                [legend-item]="'Offering'">
+                            </app-chart-legend-item>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="col-span-1 flex flex-col rounded-2xl p-6 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                    <div class="relative h-96 max-h-96">
+                        <canvas
+                            id="attendances-chart"
+                            #attendancesCanvas
+                            baseChart
+                            [type]="lineChart"
+                            [options]="lineChartOptions"
+                            [data]="attendancesChartData">
+                        </canvas>
+                    </div>
+                    <div class="legend px-14">
+                        <h5
+                            class="font-medium text-base text-slate-600 dark:text-slate-200 uppercase">
+                            Attendance
+                        </h5>
+                        <div class="grid gap-1 grid-cols-2">
+                            <app-chart-legend-item
+                                [data-colour]="'sky'"
+                                [legend-item]="'Adults'">
+                            </app-chart-legend-item>
+                            <app-chart-legend-item
+                                [data-colour]="'fuchsia'"
+                                [legend-item]="'Children\'s Service'">
+                            </app-chart-legend-item>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside
+        class="flex-shrink-0 hidden xl:flex flex-col space-y-8 p-4 min-w-[300px] w-[300px] max-w-[300px] bg-slate-200 dark:bg-slate-800 overflow-hidden"></aside>
+</div>

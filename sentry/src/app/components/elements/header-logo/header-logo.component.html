@@ -1,0 +1,19 @@
+<button
+    class="group relative flex-shrink-0 flex flex-row items-center bg-gradient-to-r from-sky-600 dark:from-sky-400 via-fuchsia-600 dark:via-fuchsia-400 to-indigo-600 dark:to-indigo-400 bg-clip-text antialiased text-transparent outline-none focus:outline-none transition-all ease-in-out duration-300"
+    [ngClass]="sidebarModeCls()"
+    (click)="toggleSidebarMode()">
+    <span
+        class="flex-shrink-0 flex flex-row items-center justify-center border-2 border-sky-600/40 group-hover:border-sky-800/80 dark:border-sky-400/20 dark:group-hover:text-sky-400 rounded-xl p-[1px] w-12 h-12 text-3xl transition-all ease-in-out duration-300">
+        <span class="material-symbols material-symbols-rounded">blur_on</span>
+    </span>
+    <h5 class="flex-1 flex-row overflow-hidden truncate" [ngClass]="textCls()">
+        Sentry
+    </h5>
+    <div
+        class="absolute right-0 rounded-full w-0.5 h-full bg-gradient-to-b from-transparent via-sky-600 to-transparent dark:from-transparent dark:via-sky-400 dark:to-transparent"></div>
+</button>
+
+<!--
+bg-gradient-to-r from-sky-600 dark:from-sky-400 via-fuchsia-600 dark:via-fuchsia-400 to-indigo-600 dark:to-indigo-400 bg-clip-text antialiased text-transparent
+text-sky-600 hover:text-sky-800 dark:text-sky-600 dark:hover:text-sky-400
+-->

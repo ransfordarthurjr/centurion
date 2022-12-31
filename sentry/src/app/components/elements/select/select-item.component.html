@@ -1,0 +1,20 @@
+<li
+    class="flex flex-row items-center justify-between py-1.5 px-5 hover:bg-sky-800 dark:hover:bg-sky-50 w-full max-w-full hover:text-sky-200 dark:hover:text-sky-800 text-sm cursor-default select-none"
+    (click)="setSelectedItem()">
+    <div
+        class="flex flex-row items-center space-x-4 w-full max-w-full overflow-hidden">
+        <span
+            class="flex-shrink-0 flex flex-row items-center justify-center rounded-full w-7 h-7 bg-white dark:bg-sky-800">
+            <img
+                *ngIf="!!item.img && item.img !== ''"
+                [src]="item.img"
+                class="flex-shrink-0 rounded-full w-full h-full object-cover" />
+        </span>
+        <span class="truncate">{{ item.text }}</span>
+    </div>
+    <span
+        *ngIf="selected"
+        class="flex-shrink-0 flex flex-row items-center justify-center w-6 h-6 font-normal text-2xl">
+        <span class="material-symbols material-symbols-rounded"> check </span>
+    </span>
+</li>

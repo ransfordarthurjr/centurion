@@ -1,0 +1,49 @@
+<button
+    type="button"
+    class="flex flex-col space-y-2 rounded-lg mt-2 px-4 pt-1.5 pb-2.5 w-full text-slate-500 dark:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-600/50 outline-none focus:outline-none transition-all ease-in-out duration-300 cursor-default"
+    [ngClass]="{
+        'ring-1 ring-sky-400/60 dark:ring-sky-200/60 bg-sky-200/20 dark:bg-sky-400/10':
+            isSelected
+    }"
+    (click)="clicked()">
+    <div
+        class="flex flex-row items-center justify-between space-x-2 rounded-md">
+        <span
+            class="truncate font-semibold text-base text-sky-800 dark:text-slate-300"
+            >{{
+                member.lastname +
+                    ', ' +
+                    member.firstname +
+                    ' ' +
+                    (member.othernames ? member.othernames : '')
+            }}
+        </span>
+
+        <span
+            class="flex-shrink-0 flex flex-row items-center justify-center w-10 h-10 font-extralight text-4xl"
+            [ngClass]="iconCls">
+            <span class="material-symbols material-symbols-rounded"
+                >{{ icon }}
+            </span>
+        </span>
+    </div>
+    <div class="flex flex-row items-center justify-between">
+        <div class="flex flex-row items-center">
+            <span
+                *ngIf="isLeader"
+                class="font-normal text-base text-slate-500 dark:text-slate-400"
+                >Class Leader</span
+            >
+        </div>
+        <div
+            class="flex flex-row items-center space-x-2 rounded-md px-3 py-1"
+            [ngClass]="membershipStatusCls()">
+            <span
+                class="rounded-full w-2 h-2"
+                [ngClass]="membershipStatusDotCls()"></span>
+            <span class="font-semibold text-base">{{
+                member.membership_statuses.name
+            }}</span>
+        </div>
+    </div>
+</button>

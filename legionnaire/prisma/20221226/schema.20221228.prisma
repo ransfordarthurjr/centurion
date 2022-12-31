@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model AltarServerType {
+  id                               Int                          @id @default(autoincrement())
+  name                             String                       @unique(map: "UNIQUE_name") @db.VarChar(128)
+  altar_servers_types_associations AltarServerTypeAssociation[]
+
+  @@map("altar_servers_types")
+}
+
+model AltarServerTypeAssociation {
+  id                    Int             @id @default(autoincrement())
+  member_id             Int
+  altar_servers_type_id Int
+  altar_servers_types   AltarServerType @relation(fields: [altar_servers_type_id], references: [id], onUpdate: Restrict, map: "FK_altar_types_associations")
+
+  @@index([altar_servers_type_id], map: "FK_alter_type_idx")
+  @@map("altar_servers_types_associations")
+}
+
+model BibleClass {
+  id                    Int                       @id @default(autoincrement())
+  name                  String?                   @unique(map: "UNIQUE_name") @default("") @db.VarChar(128)
+  member_id_leader      Int?
+  member_id_asst_leader Int?
+  adult_class           Booleany @default(dbgenerated("1"))
+  members               Member[]
+
+  @@map("bible_classes")
+}
+
+model ChurchGroup {
+  id                         Int                      @id @default(autoincrement())
+  name                       String                   @unique(map: "UNIQUE_name") @db.VarChar(128)
+  church_groups_associations ChurchGroupAssociation[]
+
+  @@map("church_groups")
+}
+
+model ChurchGroupAssociation {
+  id              Int         @id @default(autoincrement())
+  member_id       Int
+  church_group_id Int
+  church_groups   ChurchGroup @relation(fields: [church_group_id], references: [id], onUpdate: Restrict, map: "FK_church_group_associations")
+
+  @@index([church_group_id], map: "FK_alter_type_idx")
+  @@map("church_groups_associations")
+}
+
+model CoordinatingOffice {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(128)
+
+  @@map("coordinating_offices")
+}
+
+model Country {
+  country_id        Int      @id @default(autoincrement())
+  country           String   @db.VarChar(128)
+  continent         String   @db.VarChar(32)
+  region            String   @db.VarChar(32)
+  iso               String   @db.VarChar(4)
+  iso3              String   @db.VarChar(4)
+  capital           String?  @db.VarChar(128)
+  independence_year Int?
+  unsd_code         String?  @db.VarChar(4)
+  phone_code        String?  @db.VarChar(8)
+  members           Member[]
+
+  @@map("countries")
+}
+
+model Currency {
+  id              Int            @id @default(autoincrement())
+  currency        String         @unique(map: "UNIQUE_currency") @db.VarChar(128)
+  code            String         @db.VarChar(4)
+  code2           String         @db.VarChar(4)
+  payments_tithes PaymentTithe[]
+
+  @@map("currencies")
+}
+
+model Gender {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique(map: "UNIQUE_name") @db.VarChar(8)
+  members Member[]
+
+  @@map("genders")
+}
+
+model MaritalStatus {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique(map: "UNIQUE_name") @db.VarChar(64)
+  description String   @default("") @db.VarChar(512)
+  members     Member[]
+
+  @@map("marital_statuses")
+}
+
+model Member {
+  member_id            Int               @id @default(autoincrement())
+  firstname            String            @db.VarChar(128)
+  lastname             String            @db.VarChar(128)
+  othernames           String?           @db.VarChar(128)
+  email                String?           @db.VarChar(512)
+  mobile               String            @default("") @db.VarChar(32)
+  mobile_2             String?           @db.VarChar(32)
+  dateofbirth          DateTime          @db.Date
+  baptised             Booleany  @default(dbgenerated("0"))
+  confirmed            Booleany @default(dbgenerated("0"))
+  gender_id            Int
+  title_id             Int
+  membership_status_id Int
+  marital_status_id    Int
+  country_id           Int
+  occupation_id        Int
+  bible_class_id       Int               @default(1001)
+  deleted              Booleany   @default(dbgenerated("0"))
+  corporate            Booleany   @default(dbgenerated("0"))
+  bible_classes        BibleClass        @relation(fields: [bible_class_id], references: [id], onUpdate: Restrict, map: "FK_bible_classes")
+  countries            Country           @relation(fields: [country_id], references: [country_id], onUpdate: Restrict, map: "FK_countries")
+  genders              Gender            @relation(fields: [gender_id], references: [id], onUpdate: Restrict, map: "FK_genders")
+  marital_statuses     MaritalStatus     @relation(fields: [marital_status_id], references: [id], onUpdate: Restrict, map: "FK_marital_statuses")
+  membership_statuses  MembershipStatus  @relation(fields: [membership_status_id], references: [id], onUpdate: Restrict, map: "FK_membership_statuses")
+  occupations          Occupation        @relation(fields: [occupation_id], references: [id], onUpdate: Restrict, map: "FK_occupations")
+  titles               Title             @relation(fields: [title_id], references: [id], onUpdate: Restrict, map: "FK_titles")
+  payments_tithes      PaymentTithe[]
+
+  @@index([country_id], map: "FK_country_idx")
+  @@index([gender_id], map: "FK_gender_idx")
+  @@index([marital_status_id], map: "FK_marital_status_idx")
+  @@index([membership_status_id], map: "FK_membership_status_idx")
+  @@index([occupation_id], map: "FK_occupation_idx")
+  @@index([title_id], map: "FK_title_idx")
+  @@index([bible_class_id], map: "FK_bible_class_idx")
+  @@map("members")
+}
+
+model MembershipStatus {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique(map: "UNIQUE_name") @db.VarChar(64)
+  description String   @default("") @db.VarChar(2048)
+  members     Member[]
+
+  @@map("membership_statuses")
+}
+
+model Occupation {
+  id                     Int                @id @default(autoincrement())
+  name                   String             @unique(map: "UNIQUE_name") @db.VarChar(128)
+  industry_id            Int
+  members                Member[]
+  occupations_industries OccupationIndustry @relation(fields: [industry_id], references: [id], onUpdate: Restrict, map: "FK_occupations_industries")
+
+  @@index([industry_id], map: "FK_industry_idx")
+  @@map("occupations")
+}
+
+model OccupationIndustry {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique(map: "UNIQUE_name") @db.VarChar(128)
+  occupations Occupation[]
+
+  @@map("occupations_industries")
+}
+
+model Organization {
+  id                         Int                       @id @default(autoincrement())
+  name                       String                    @unique(map: "UNIQUE_name") @db.VarChar(128)
+  organizations_associations OrganizationAssociation[]
+
+  @@map("organizations")
+}
+
+model OrganizationAssociation {
+  id              Int          @id @default(autoincrement())
+  member_id       Int
+  organization_id Int
+  organizations   Organization @relation(fields: [organization_id], references: [id], onUpdate: Restrict, map: "FK_organizations_associations")
+
+  @@index([organization_id], map: "FK_organization _idx")
+  @@map("organizations_associations")
+}
+
+model PaymentTithe {
+  id                    Int         @id @default(autoincrement())
+  payment_timestamp     DateTime    @default(now()) @db.Timestamp(0)
+  payment_date          DateTime    @db.Date
+  payment_type_id       Int
+  currency_id           Int
+  amount                Decimal     @default(0.0000) @db.Decimal(13, 4)
+  member_id             Int
+  transaction_reference String?     @db.VarChar(96)
+  transaction_date      DateTime?   @db.Date
+  description           String?     @db.VarChar(512)
+  currencies            Currency    @relation(fields: [currency_id], references: [id], onUpdate: Restrict, map: "FK_payments_currencies")
+  members               Member      @relation(fields: [member_id], references: [member_id], onUpdate: Restrict, map: "FK_payments_tithes")
+  payments_types        PaymentType @relation(fields: [payment_type_id], references: [id], onUpdate: Restrict, map: "FK_payments_types")
+
+  @@index([member_id], map: "FK_memeber_tithe_idx")
+  @@index([currency_id], map: "FK_payment_currency_idx")
+  @@index([payment_type_id], map: "FK_payment_idx")
+  @@map("payments_tithes")
+}
+
+model PaymentType {
+  id              Int            @id @default(autoincrement())
+  name            String         @unique(map: "UNIQUE_name") @db.VarChar(128)
+  description     String         @default("") @db.VarChar(512)
+  payments_tithes PaymentTithe[]
+
+  @@map("payments_types")
+}
+
+model Title {
+  id      Int      @id @default(autoincrement())
+  title   String   @unique(map: "UNIQUE_title") @db.VarChar(64)
+  members Member[]
+
+  @@map("titles")
+}
+
+enum Booleany {
+    truthy @map("1")
+    falsey @map("0")
+}

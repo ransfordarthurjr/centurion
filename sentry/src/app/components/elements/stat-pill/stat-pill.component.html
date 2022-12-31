@@ -1,0 +1,42 @@
+<div class="flex flex-col border rounded-2xl overflow-hidden" [ngClass]="cls()">
+    <div id="head" class="flex-shrink-0 flex flex-row items-center space-x-4">
+        <div
+            class="flex-shrink-0 flex flex-row items-center justify-center border-r rounded-br-2xl w-14 h-14"
+            [ngClass]="headerIconCls()">
+            <span
+                class="flex flex-row items-center justify-center material-symbols material-symbols-rounded font-extralight text-4xl"
+                >{{ icon }}
+            </span>
+        </div>
+        <h5 class="font-semibold text-base uppercase font-roboto-slab">
+            {{ title }}
+        </h5>
+    </div>
+    <div
+        id="body"
+        class="flex-shrink-0 flex flex-row border-t pl-14 py-2 font-semibold text-2xl lg:text-3xl"
+        [ngClass]="bodyCls()">
+        {{ stat }}
+    </div>
+    <div
+        id="foot"
+        class="flex-shrink-0 flex flex-row items-center space-x-1 pb-3 pl-14 text-sm">
+        <span
+            class="flex-shrink-0 flex flex-row items-center justify-center"
+            *ngIf="statIncrease; then increase; else decrease">
+        </span>
+        <span class="font-medium">{{ statFootnote }}</span>
+    </div>
+</div>
+
+<ng-template #increase>
+    <span class="material-symbols material-symbols-rounded font-extrabold">
+        north
+    </span>
+</ng-template>
+
+<ng-template #decrease>
+    <span class="material-symbols material-symbols-rounded font-extrabold">
+        south
+    </span>
+</ng-template>

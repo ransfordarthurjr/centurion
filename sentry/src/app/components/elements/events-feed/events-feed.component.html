@@ -1,0 +1,27 @@
+<div *ngFor="let eventGroup of eventGroups; last as isLast">
+    <div
+        class="relative z-0 flex flex-col border-l-2"
+        [ngClass]="{
+            'border-transparent dark:border-transparent': isLast,
+            'border-slate-200/60 dark:border-slate-800/60 pb-8': !isLast
+        }">
+        <div
+            class="absolute -top-6 -left-6 z-10 flex flex-row items-center space-x-2 select-none">
+            <div
+                class="flex flex-row items-center justify-center rounded-full w-12 h-12 bg-slate-200 dark:bg-slate-800">
+                <span
+                    class="shrink-0 flex flex-row items-center justify-center w-10 h-10 font-light text-3xl text-slate-600 dark:text-sky-200">
+                    <span class="material-symbols material-symbols-rounded"
+                        >event
+                    </span>
+                </span>
+            </div>
+
+            <h4 class="font-semibold text-lg text-slate-600 dark:text-sky-200">
+                {{ eventGroup.date }}
+            </h4>
+        </div>
+
+        <app-event-feed-item [events]="eventGroup.events"></app-event-feed-item>
+    </div>
+</div>

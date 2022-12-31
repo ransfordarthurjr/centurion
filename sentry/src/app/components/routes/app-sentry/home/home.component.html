@@ -1,0 +1,87 @@
+<div class="flex flex-row space-x-8 h-full max-h-full">
+    <div class="flex-1 flex flex-col space-y-8 py-4 pl-4 pr-4 lg:pr-0">
+        <!-- page heading-->
+        <div
+            class="flex-shrink-0 relative flex flex-row space-x-4 rounded-2xl mt-6 p-8 h-80 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+            <div
+                class="flex flex-col space-y-4 w-9/12 lg:w-5/12 min-w-[250px] overflow-hidden">
+                <h3 class="font-medium truncate">
+                    {{ greeting }}
+                    <span *ngIf="!!user">{{ user.firstname }},</span>
+                </h3>
+                <p class="font-normal text-base tracking-wider line-clamp-8">
+                    Welcome back <span *ngIf="!!user">{{ user.name }}.</span>
+                    <br />
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Molestiae velit repellat libero voluptatem placeat dolore
+                    officia perferendis quos, necessitatibus officiis ex! Eos
+                    praesentium quo possimus. Deserunt praesentium similique
+                    nobis cum?
+                    <br />
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Molestiae velit repellat libero voluptatem placeat dolore
+                    officia perferendis quos, necessitatibus officiis ex! Eos
+                    praesentium quo possimus. Deserunt praesentium similique
+                    nobis cum?
+                </p>
+            </div>
+            <div class="relative hidden lg:block w-7/12">
+                <div class="absolute right-0 bottom-0 w-full h-[130%]">
+                    <img
+                        src="assets/images/routes/church-building.svg"
+                        alt="church"
+                        class="object-right-bottom object-cover h-full max-h-full" />
+                    <!-- w-[480px] h-[280px] -->
+                </div>
+            </div>
+        </div>
+
+        <!-- page content -->
+        <div class="flex-1 rounded-2xl p-8 bg-sky-200">
+            @To do social mentions or feedback
+        </div>
+    </div>
+
+    <aside
+        class="flex-shrink-0 hidden lg:flex flex-col space-y-8 p-4 w-[400px] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+        <div
+            class="flex-shrink-0 flex flex-row items-center space-x-4 pt-6 text-sky-800 dark:text-sky-200">
+            <div
+                class="flex flex-row items-center space-x-1 border-2 border-slate-400/40 dark:border-slate-600/60 rounded-md px-2 bg-white dark:bg-slate-600 select-none">
+                <span
+                    class="shrink-0 flex flex-row items-center justify-center w-8 h-8 font-extralight text-2xl">
+                    <span class="material-symbols material-symbols-rounded"
+                        >calendar_today
+                    </span>
+                </span>
+                <span>Today</span>
+            </div>
+            <span>{{ timestamp.toFormat('ccc, LLLL dd, yyyy.') }}</span>
+        </div>
+
+        <div class="flex-shrink-0 flex flex-row justify-center">
+            <div class="rounded-2xl w-96 p-2 bg-slate-600 dark:bg-slate-900">
+                <mat-calendar></mat-calendar>
+            </div>
+        </div>
+
+        <div
+            class="flex-1 rounded-2xl min-h-[100px] bg-white dark:bg-slate-700 overflow-hidden text-slate-800 dark:text-sky-100 ring-1 ring-slate-900 ring-opacity-5 shadow-lg focus:outline-none">
+            <div class="flex flex-col h-full">
+                <div
+                    class="flex-shrink-0 flex flex-row items-center justify-between border-b-2 border-slate-200/80 dark:border-slate-600/80 px-6 py-4">
+                    <h4 class="text-lg">Upcoming Events</h4>
+                </div>
+                <div id="events-body" class="flex-1 px-6 py-4 overflow-hidden">
+                    <div
+                        class="py-2 w-full max-w-full max-h-full overflow-y-auto">
+                        <div class="flex flex-col px-6 py-4">
+                            <app-events-feed
+                                [event-groups]="eventGroups"></app-events-feed>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

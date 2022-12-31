@@ -1,0 +1,167 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AltarServerType {
+  id: Int!
+  name: String!
+}
+
+type BibleClass {
+  adult_class: Booleany!
+  id: Int!
+  member_id_asst_leader: Int
+  member_id_leader: Int
+  name: String
+}
+
+"""The supported Booleany Enums."""
+enum Booleany {
+  falsey
+  truthy
+}
+
+type ChurchGroup {
+  id: Int!
+  name: String!
+}
+
+type CoordinatingOffice {
+  id: Int!
+  name: String!
+}
+
+type Country {
+  capital: String
+  continent: String!
+  country: String!
+  country_id: Int!
+  independence_year: Int
+  iso: String!
+  iso3: String!
+  phone_code: String
+  region: String!
+  unsd_code: String
+}
+
+type Currency {
+  code: String!
+  code2: String!
+  currency: String!
+  id: Int!
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+type Gender {
+  id: Int!
+  name: String!
+}
+
+type MaritalStatus {
+  description: String!
+  id: Int!
+  name: String!
+}
+
+type Member {
+  baptised: Booleany!
+  bible_class_id: Int!
+  bible_classes: BibleClass!
+  confirmed: Booleany!
+  corporate: Booleany!
+  countries: Country!
+  country_id: Int!
+  dateofbirth: Date!
+  deleted: Booleany!
+  email: String
+  firstname: String!
+  gender_id: Int!
+  genders: Gender!
+  lastname: String
+  marital_status_id: Int!
+  marital_statuses: MaritalStatus!
+  member_id: Int!
+  membership_status_id: Int!
+  membership_statuses: MembershipStatus!
+  mobile: String!
+  mobile_2: String
+  occupation_id: Int!
+  occupations: Occupation!
+  othernames: String
+  title_id: Int!
+  titles: Title!
+}
+
+type MembershipStatus {
+  description: String!
+  id: Int!
+  name: String!
+}
+
+type Occupation {
+  id: Int!
+  industry_id: Int!
+  name: String!
+}
+
+type OccupationIndustry {
+  id: Int!
+  name: String!
+}
+
+type Organization {
+  id: Int!
+  name: String!
+}
+
+type PaymentType {
+  description: String!
+  id: Int!
+  name: String!
+}
+
+type Query {
+  altarServerTypeById(id: Int!): AltarServerType
+  altarServersTypes: [AltarServerType!]!
+  bibleClasses: [BibleClass!]!
+  bibleClassesByName(name: String!): [BibleClass!]
+  churchGroupById(id: Int!): ChurchGroup
+  churchGroups: [ChurchGroup!]!
+  coordinatingOfficeById(id: Int!): CoordinatingOffice
+  coordinatingOffices: [CoordinatingOffice!]!
+  countries: [Country!]!
+  countriesByName(name: String!): [Country!]
+  countryById(id: Int!): Country
+  currencies: [Currency!]!
+  currenciesByName(name: String!): [Currency!]
+  currencyById(id: Int!): Currency
+  genderById(id: Int!): Gender
+  genders: [Gender!]!
+  maritalStatusById(id: Int!): MaritalStatus
+  maritalStatuses: [MaritalStatus!]!
+  members: [Member!]!
+  membersByName(name: String!): [Member!]!
+  membershipStatusById(id: Int!): MembershipStatus
+  membershipStatuses: [MembershipStatus!]!
+  occupationById(id: Int!): Occupation
+  occupationIndustries: [OccupationIndustry!]!
+  occupationIndustriesByName(name: String!): [OccupationIndustry!]
+  occupationIndustryById(id: Int!): OccupationIndustry
+  occupations: [Occupation!]!
+  occupationsByName(name: String!): [Occupation!]
+  organizationById(id: Int!): Organization
+  organizations: [Organization!]!
+  paymentTypeById(id: Int!): PaymentType
+  paymentsTypes: [PaymentType!]!
+  titleById(id: Int!): Title
+  titles: [Title!]!
+}
+
+type Title {
+  id: Int!
+  title: String!
+}

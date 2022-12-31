@@ -1,0 +1,129 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './assets/fonts/fonts.scss';
+
+html,
+body {
+    /*height: 100%;*/
+    font-size: 14px;
+    font-family: 'Open Sans';
+}
+
+html {
+    .simplebar-scrollbar::before {
+        @apply bg-slate-400;
+    }
+
+    &.dark {
+        .simplebar-scrollbar::before {
+            @apply bg-slate-400;
+        }
+    }
+
+    // scrollbar-gutter: stable;
+
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 transparent;
+
+    ::-webkit-scrollbar {
+        @apply w-2;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply rounded-full;
+        margin-block: 0.5em;
+        //@apply bg-slate-200;
+        @apply bg-transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply border-2;
+        @apply border-slate-200;
+        @apply rounded-full;
+        @apply bg-slate-400;
+    }
+
+    &.dark {
+        scrollbar-color: #94a3b8 transparent;
+
+        ::-webkit-scrollbar-track {
+            @apply rounded-full;
+            //@apply bg-slate-800;
+            @apply bg-transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            @apply rounded-full;
+            @apply bg-slate-400;
+        }
+    }
+}
+
+body {
+    margin: 0;
+    @apply text-slate-600;
+    /*@apply hover:text-slate-800;*/
+    @apply dark:text-slate-600
+    /*@apply dark:hover:text-slate-400*/;
+}
+
+.font-open-sans {
+    font-family: 'Open Sans';
+}
+
+.font-roboto-slab {
+    font-family: 'Roboto Slab';
+}
+
+.main-route-component {
+    @apply flex-1;
+    @apply h-full;
+    @apply max-h-full;
+    @apply overflow-hidden;
+}
+
+.sentry-app-route-component {
+    @apply flex-1;
+    @apply h-full;
+    @apply max-h-full;
+    @apply overflow-hidden;
+}
+
+/*
+font-style
+font-variant
+font-weight
+font-size/line-height
+font-family
+*/
+h1 {
+    @apply font-semibold;
+    @apply text-5xl;
+}
+
+h2 {
+    @apply font-semibold;
+    @apply text-4xl;
+}
+
+h3 {
+    @apply font-semibold;
+    @apply text-3xl;
+}
+
+h4 {
+    @apply font-semibold;
+    @apply text-2xl;
+}
+
+h5 {
+    @apply font-semibold;
+    @apply text-xl;
+}

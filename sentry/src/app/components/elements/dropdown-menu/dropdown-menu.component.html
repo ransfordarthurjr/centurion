@@ -1,0 +1,17 @@
+<menu
+    @animateinout
+    *ngIf="shown"
+    class="absolute right-0 z-10 origin-top-right rounded-md divide-y divide-slate-100 dark:divide-slate-600 mt-2 w-56 bg-white dark:bg-slate-700 overflow-hidden ring-1 ring-slate-900 ring-opacity-5 shadow-lg focus:outline-none"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="menu-button"
+    tabindex="-1">
+    <div class="py-1" role="none" *ngFor="let menuitems of menu.menuitems">
+        <app-dropdown-menu-item
+            *ngFor="let menuitem of menuitems"
+            [menu-id]="menu.menuid"
+            [index]="menuitem.index"
+            [icon]="menuitem.icon"
+            [text]="menuitem.text"></app-dropdown-menu-item>
+    </div>
+</menu>
