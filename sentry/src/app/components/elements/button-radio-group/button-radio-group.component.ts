@@ -35,7 +35,6 @@ export class ButtonRadioGroupComponent
 
     ngAfterViewInit(): void {
         // this.activateButton(this._activeButton);
-        console.log('after view init');
     }
 
     private initActiveButton(): void {
